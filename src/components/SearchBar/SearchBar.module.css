@@ -1,0 +1,29 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: aqua;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.button {
+  border-radius: 5px;
+  border: none;
+  width: 80px;
+  transform: scale(1);
+  transition: 200ms;
+}
+
+.button:hover,
+.button:focus {
+  transform: scale(1.05);
+  transition: 200ms;
+  cursor: pointer;
+}
