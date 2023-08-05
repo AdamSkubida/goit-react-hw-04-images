@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { SearchBar } from './SearchBar/index';
 import { Loader } from './Loader/index';
 import { ImageGallery } from './ImageGallery/index';
@@ -12,24 +12,12 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
-    fetchImages();
-  }, [query]);
-
-  useEffect(() => {
-    fetchImages();
-  }, [page]);
-
   const handleSubmit = newQuery => {
     setPage(1);
     setQuery(newQuery);
   };
 
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -47,7 +35,11 @@ export const App = () => {
       console.log(error);
       setIsLoading(false);
     }
-  };
+  }, [query, page]);
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
 
   const handleClick = async () => {
     setPage(page + 1);
